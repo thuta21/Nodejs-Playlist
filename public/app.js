@@ -1,2 +1,3 @@
-console.log(__dirname);
-console.log(__filename);
+let counter = require('./count');
+
+console.log(counter(["apple", "orange", "banana"]));
