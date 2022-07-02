@@ -2,10 +2,14 @@ const http = require("node:http");
 const fs = require("node:fs");
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    var readMyStream = fs.createReadStream(__dirname + "/index.html", "utf8");
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    var myObj = {
+        name: "Thuta",
+        age: 21,
+        address: "Yangon"
+    }
 
-    readMyStream.pipe(res);
+    res.end(JSON.stringify(myObj));
 });
 
 server.listen(3000, '127.0.0.1');
