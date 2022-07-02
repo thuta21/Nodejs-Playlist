@@ -1,16 +1,12 @@
-const fs = require("fs");
+const http = require("node:http");
 
-// create dir and store write file
-/*fs.mkdir("stuff", () => {
-    fs.readFile("readme.txt", (err, data) => {
-        fs.writeFile("stuff/writeme.txt", data, () => {
-            console.log("success")
-        })
-    })
-})*/
+const server = http.createServer((req, res) => {
+    console.log(req.url);
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify({
+        data: 'Hello World!'
+    }));
+});
 
-fs.unlink("./stuff/writeme.txt", () => {
-    fs.rmdir("stuff", () => {
-        console.log('success');
-    })
-})
+server.listen(3000, '127.0.0.1');
+console.log('now listening to port 3000');
