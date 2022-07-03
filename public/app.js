@@ -1,16 +1,21 @@
-const http = require("node:http");
-const fs = require("node:fs");
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    var myObj = {
-        name: "Thuta",
-        age: 21,
-        address: "Yangon"
-    }
+const app = express();
+//need to set engine
+app.set("view engine", "ejs");
 
-    res.end(JSON.stringify(myObj));
+app.get("/", function (req, res){
+    res.send("This is home page.");
 });
 
-server.listen(3000, '127.0.0.1');
-console.log('now listening to port 3000');
+app.get("/contact", function (req, res){
+    res.send("This is contact page.");
+});
+
+app.get("/profile/:id", function(req,res){
+    res.render("profile", {id: req.params.id});
+})
+
+app.listen(3000, () => {
+    console.log("server is running.");
+})
